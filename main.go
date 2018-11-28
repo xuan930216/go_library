@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"time"
+	"xuan/mcp"
+	"xuan/utils/files"
 )
 
 var (
@@ -23,13 +25,10 @@ func defaultDate(mode string) (d time.Time) {
 	switch {
 	case mode == "mc.tp":
 		d = d.AddDate(0, 0, -2)
-		break
 	case mode == "wm":
 		d = d.AddDate(0, 0, -2)
-		break
 	case mode == "zd":
 		d = d.AddDate(0, 0, -1)
-		break
 	}
 	return
 }
@@ -40,12 +39,24 @@ func init() {
 	//check is any task is called, use nil instead "" because falgMode is pointer
 	if flagMode != nil {
 		date = defaultDate(*flagMode)
-		fmt.Println(date)
 	}
 	//calcualte the startDate
-	date = time.Now()
+	date = date.AddDate(0, 0, -1**flagOffset)
+	delta = *flagDelta
 
 }
 func main() {
-	fmt.Println("running")
+	if flagMode != nil {
+		switch {
+		case *flagMode == "":
+			fmt.Println("No Mode")
+		case *flagMode == "env":
+			fmt.Println(date)
+			fmt.Println(delta)
+		case *flagMode == "mc.tp":
+			mcp.CollectTouchPoints(date, delta)
+		case *flagMode == "files":
+			files.ParseFile()
+		}
+	}
 }
