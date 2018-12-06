@@ -28,6 +28,7 @@ func ParseFile() {
 	//read file using the os package.
 	//once we have opened the file, we will defer the close until the end of the function
 	pwd, _ := os.Getwd()
+	fmt.Println(pwd)
 	jsonFile, err := os.Open(pwd + "/utils/files/users.json")
 	if err != nil {
 		log.Fatal(err)

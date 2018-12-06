@@ -4,8 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"time"
-	"xuan/mcp"
-	"xuan/utils/files"
+	"xuan/test2/go_library/utils/files"
 )
 
 var (
@@ -53,8 +52,6 @@ func main() {
 		case *flagMode == "env":
 			fmt.Println(date)
 			fmt.Println(delta)
-		case *flagMode == "mc.tp":
-			mcp.CollectTouchPoints(date, delta)
 		case *flagMode == "files":
 			files.ParseFile()
 		}
